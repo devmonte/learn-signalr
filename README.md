@@ -1,12 +1,8 @@
 My own examples of using SignalR library.
 
 Already implemented examples:
-- Example 2: C# client with server
-
-
-Examples to implement:
-- [ ] Example 1: JavaScript client & server
-- [ ] Example 2: .Net client & server
+- [x] Example 1: Simple Chat
+- [x] Example 2: .Net client & server
 - [ ] Example 3: Advanced SignalR server: TypedHubs, Authorization, Users,
 - [ ] Example 4: MessagePack 
 - [ ] Example 5: Azure SignalR Service
