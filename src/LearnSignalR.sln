@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "example-4\Client\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat", "example-1\Chat\Chat.csproj", "{8F2687C2-7B5A-4A99-AC18-7CA85C0241E3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example-1", "example-1", "{FF79770C-F038-4CB8-B401-A3CFEAEA857A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatConsoleClient", "example-1\ChatConsoleClient\ChatConsoleClient.csproj", "{F4F1BCAD-D93C-4854-81B8-256CF3D32C9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,17 @@ Global
 		{8F2687C2-7B5A-4A99-AC18-7CA85C0241E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F2687C2-7B5A-4A99-AC18-7CA85C0241E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2687C2-7B5A-4A99-AC18-7CA85C0241E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4F1BCAD-D93C-4854-81B8-256CF3D32C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4F1BCAD-D93C-4854-81B8-256CF3D32C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4F1BCAD-D93C-4854-81B8-256CF3D32C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4F1BCAD-D93C-4854-81B8-256CF3D32C9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8F2687C2-7B5A-4A99-AC18-7CA85C0241E3} = {FF79770C-F038-4CB8-B401-A3CFEAEA857A}
+		{F4F1BCAD-D93C-4854-81B8-256CF3D32C9F} = {FF79770C-F038-4CB8-B401-A3CFEAEA857A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AAB02CE-FD7B-4AB9-A90D-F9D1571F2CA1}
