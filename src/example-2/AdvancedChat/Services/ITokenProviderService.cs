@@ -9,6 +9,6 @@ namespace AdvancedChat.Services
 {
     public interface ITokenProviderService
     {
-        Task<string> GenerateToken(UserDto user);
+        string GenerateToken(UserDto user);
     }
 }

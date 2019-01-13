@@ -18,7 +18,7 @@ namespace AdvancedChat.Services
             _configuration = configuration;
         }
 
-        public Task<string> GenerateToken(UserDto user)
+        public string GenerateToken(UserDto user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["SecretKey"]);
@@ -34,7 +34,7 @@ namespace AdvancedChat.Services
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Task.FromResult(tokenHandler.WriteToken(token));
+            return tokenHandler.WriteToken(token);
         }
     }
 }

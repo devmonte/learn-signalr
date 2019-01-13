@@ -19,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example-2", "example-2", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example-4", "example-4", "{D6B6D993-9E98-457C-99E2-4EDF54D8D2CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedChat", "example-2\AdvancedChat\AdvancedChat.csproj", "{E18006E3-0C96-412C-BBFD-9CF3965D16A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedChat", "example-2\AdvancedChat\AdvancedChat.csproj", "{E18006E3-0C96-412C-BBFD-9CF3965D16A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedChatConsoleClient", "example-2\AdvancedChatConsoleClient\AdvancedChatConsoleClient.csproj", "{DF5EB555-6167-438D-AB10-8476D6927848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{E18006E3-0C96-412C-BBFD-9CF3965D16A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E18006E3-0C96-412C-BBFD-9CF3965D16A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E18006E3-0C96-412C-BBFD-9CF3965D16A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF5EB555-6167-438D-AB10-8476D6927848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5EB555-6167-438D-AB10-8476D6927848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5EB555-6167-438D-AB10-8476D6927848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5EB555-6167-438D-AB10-8476D6927848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{8F2687C2-7B5A-4A99-AC18-7CA85C0241E3} = {FF79770C-F038-4CB8-B401-A3CFEAEA857A}
 		{F4F1BCAD-D93C-4854-81B8-256CF3D32C9F} = {FF79770C-F038-4CB8-B401-A3CFEAEA857A}
 		{E18006E3-0C96-412C-BBFD-9CF3965D16A4} = {E408581B-9A80-4027-8D80-1121536F3D29}
+		{DF5EB555-6167-438D-AB10-8476D6927848} = {E408581B-9A80-4027-8D80-1121536F3D29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AAB02CE-FD7B-4AB9-A90D-F9D1571F2CA1}
