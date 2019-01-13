@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AdvancedChat.Hubs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Chat.Hubs
 {
     [Authorize]
-    public class ChatHub : Hub
+    public class ChatHub : Hub<IChatHubClient>
     {
         public async Task SendMessage(string user, string message)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.ReceiveMessage(user, message);
         }
     }
 }
