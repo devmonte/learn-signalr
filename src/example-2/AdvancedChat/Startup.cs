@@ -32,6 +32,8 @@ namespace AdvancedChat
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddHealthChecks();
+
             services.AddAuthorization();
             services.AddAuthentication(x =>
             {
@@ -84,6 +86,7 @@ namespace AdvancedChat
             {
                 app.UseHsts();
             }
+            app.UseHealthChecks("/health");
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
