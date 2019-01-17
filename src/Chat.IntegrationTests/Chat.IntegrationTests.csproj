@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\example-2\AdvancedChat\AdvancedChat.csproj" />
+    <ProjectReference Include="..\example-1\Chat\Chat.csproj" />
   </ItemGroup>
 
 </Project>
