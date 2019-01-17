@@ -15,7 +15,8 @@ namespace ChatConsoleClient
                 .WithUrl("https://example-one-chat.azurewebsites.net/chatHub")
                 .Build();
 
-            connection.On<string, string>("ReceiveMessage", (user, message) => Console.WriteLine($"User: {user} send: {message}"));
+            connection.On<string, string>("ReceiveMessage", 
+                (user, message) => Console.WriteLine($"User: {user} send: {message}"));
 
             await connection.StartAsync()
                 .ContinueWith(_ => Console.WriteLine("Connected!"));
