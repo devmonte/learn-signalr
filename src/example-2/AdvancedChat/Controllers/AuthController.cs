@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AdvancedChat.Dto;
 using AdvancedChat.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdvancedChat.Controllers
@@ -32,6 +33,13 @@ namespace AdvancedChat.Controllers
 
             var token = _tokenProviderService.GenerateToken(user);
             return Ok(token);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(":)");
         }
 
     }

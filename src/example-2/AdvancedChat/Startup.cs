@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +30,14 @@ namespace AdvancedChat
 
             services.AddHealthChecks();
 
-            services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
+                {
+                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireClaim(ClaimTypes.NameIdentifier);
+                });
+            });
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,29 +47,27 @@ namespace AdvancedChat
             {
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true,
-                    ValidateAudience = true,
+                    LifetimeValidator = (before, expires, token, parameters) => expires < DateTime.UtcNow.AddDays(1),
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateActor = false,
                     ValidateLifetime = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["SecretKey"]))
                 };
+                //x.Events = new JwtBearerEvents
+                //{
+                //    OnMessageReceived = context =>
+                //    {
+                //        var accessToken = context.Request.Query["access_token"];
 
-                x.Events = new JwtBearerEvents
-                {
-                    OnMessageReceived = context =>
-                    {
-                        var accessToken = context.Request.Query["access_token"];
-
-                        // If the request is for our hub...
-                        var path = context.HttpContext.Request.Path;
-                        if (!string.IsNullOrEmpty(accessToken) &&
-                            (path.StartsWithSegments("/hubs/chatHub")))
-                        {
-                            // Read the token out of the query string
-                            context.Token = accessToken;
-                        }
-                        return Task.CompletedTask;
-                    }
-                };
+                //        if (!string.IsNullOrEmpty(accessToken) &&
+                //            (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
+                //        {
+                //            context.Token = context.Request.Query["access_token"];
+                //        }
+                //        return Task.CompletedTask;
+                //    }
+                //};
             });
 
             services.AddSignalR();
@@ -73,23 +80,14 @@ namespace AdvancedChat
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
             app.UseHealthChecks("/health");
+            //app.UseHttpsRedirection  TODO causing errors!
             app.UseAuthentication();
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chatHub");
             });
+
             app.UseMvc();
         }
     }

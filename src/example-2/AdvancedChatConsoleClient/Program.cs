@@ -18,7 +18,7 @@ namespace AdvancedChatConsoleClient
 
             var token = await GetToken();
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5000/chatHub", options =>
+                .WithUrl("https://localhost:5000/chatHub", options =>
                 {
                     options.AccessTokenProvider = () => Task.FromResult(token);
                 })
