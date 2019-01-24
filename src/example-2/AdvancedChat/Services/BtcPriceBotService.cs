@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using AdvancedChat.Dto;
 
 namespace AdvancedChat.Services
 {
@@ -31,8 +32,15 @@ namespace AdvancedChat.Services
         public async Task SendCurrentBtcPrice(CancellationToken cancellationToken)
         {
             if (!cancellationToken.IsCancellationRequested)
+            {
+                var message = new MessageDto
+                {
+                    User = "BtcPriceBot",
+                    Message = $"Current BTC price: {new Random().Next(3000, 5000)} $!"
+                };
                 await _hubContext.Clients.All
-                    .ReceiveMessage("BtcPriceBot", $"Current BTC price: {new Random().Next(3000, 5000)} $!");
+                    .ReceiveMessage(message);
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

@@ -16,18 +16,16 @@ namespace AdvancedChat
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddHealthChecks();
 
             services.AddAuthorization(options =>
@@ -54,30 +52,14 @@ namespace AdvancedChat
                     ValidateLifetime = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["SecretKey"]))
                 };
-                //x.Events = new JwtBearerEvents
-                //{
-                //    OnMessageReceived = context =>
-                //    {
-                //        var accessToken = context.Request.Query["access_token"];
-
-                //        if (!string.IsNullOrEmpty(accessToken) &&
-                //            (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
-                //        {
-                //            context.Token = context.Request.Query["access_token"];
-                //        }
-                //        return Task.CompletedTask;
-                //    }
-                //};
             });
 
             services.AddSignalR();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<ITokenProviderService, TokenProviderService>();
-
             services.AddHostedService<BtcPriceBotService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseHealthChecks("/health");
@@ -87,7 +69,6 @@ namespace AdvancedChat
             {
                 routes.MapHub<ChatHub>("/chatHub");
             });
-
             app.UseMvc();
         }
     }
