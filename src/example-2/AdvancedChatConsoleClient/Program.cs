@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using AdvancedChat.Dto;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -18,17 +19,18 @@ namespace AdvancedChatConsoleClient
 
             var token = await GetToken();
             var connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:5000/chatHub", options =>
+                .WithUrl("http://localhost:5000/chatHub", options =>
                 {
                     options.AccessTokenProvider = () => Task.FromResult(token);
                 })
-                .ConfigureLogging(logging => {
+                .ConfigureLogging(logging =>
+                {
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddConsole();
                 })
                 .Build();
 
-            connection.On<string, string>("ReceiveMessage", (user, message) => Console.WriteLine($"User: {user} send: {message}"));
+            connection.On<MessageDto>("ReceiveMessage", (message) => Console.WriteLine($"User: {message.User} send: {message.Message}"));
 
             await connection.StartAsync()
                 .ContinueWith((result) =>
@@ -39,17 +41,17 @@ namespace AdvancedChatConsoleClient
                         return;
                     }
                     Console.WriteLine("Connected!");
-
                 });
 
             while (connection.State.Equals(HubConnectionState.Connected))
             {
                 await Task.Delay(TimeSpan.FromSeconds(10));
-                await connection.InvokeAsync("SendMessage", "ConsoleClient", "Greetings to all participants of Bydgoszcz .Net User Group!");
+                await connection.InvokeAsync("SendMessage", new { User = "ConsoleClient", Message = "Greetings to all participants of Bydgoszcz .Net User Group!" });
             }
 
             Console.WriteLine("Press key to close!");
             Console.ReadKey();
+            await connection.StopAsync();
         }
 
         static async Task<string> GetToken()

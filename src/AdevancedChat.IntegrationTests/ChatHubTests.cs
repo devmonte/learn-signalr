@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AdevancedChat.IntegrationTests
+namespace AdvancedChat.IntegrationTests
 {
     public class ChatHubTests : IClassFixture<WebApplicationFactory<Startup>>
     {
@@ -84,9 +84,9 @@ namespace AdevancedChat.IntegrationTests
 
             //Act
             await hubConnection.StartAsync();
-            
-            //Assert
 
+            //Assert
+            hubConnection.State.Should().Be(HubConnectionState.Connected);
         }
 
     }
