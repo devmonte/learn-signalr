@@ -55,7 +55,6 @@ namespace AdvancedChat
             });
 
             services.AddSignalR();
-            services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<ITokenProviderService, TokenProviderService>();
             services.AddHostedService<BtcPriceBotService>();
         }

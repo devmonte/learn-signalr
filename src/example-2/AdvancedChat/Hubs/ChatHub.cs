@@ -24,16 +24,20 @@ namespace AdvancedChat.Hubs
             await Clients.All.ReceiveMessage(message);
         }
 
-        public override Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()
         {
-            _logger.LogDebug($"New user connected: {Context.UserIdentifier}");
-            return base.OnConnectedAsync();
+            var notificationMessage = $"New user connected: {Context.UserIdentifier}";
+            _logger.LogDebug(notificationMessage);
+            await Clients.AllExcept(Context.UserIdentifier).ReceiveNotification(notificationMessage);
+            await base.OnConnectedAsync();
         }
 
-        public override Task OnDisconnectedAsync(Exception exception)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
-            _logger.LogDebug($"User: {Context.UserIdentifier} disconnected!");
-            return base.OnDisconnectedAsync(exception);
+            var notificationMessage = $"User: {Context.UserIdentifier} disconnected!";
+            _logger.LogDebug(notificationMessage);
+            await Clients.All.ReceiveNotification(notificationMessage);
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

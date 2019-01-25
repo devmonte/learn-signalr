@@ -10,5 +10,6 @@ namespace AdvancedChat.Hubs
     public interface IChatHubClient
     {
         Task ReceiveMessage(MessageDto message);
+        Task ReceiveNotification(string notification);
     }
 }

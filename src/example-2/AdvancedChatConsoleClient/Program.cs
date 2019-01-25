@@ -46,7 +46,8 @@ namespace AdvancedChatConsoleClient
             while (connection.State.Equals(HubConnectionState.Connected))
             {
                 await Task.Delay(TimeSpan.FromSeconds(10));
-                await connection.InvokeAsync("SendMessage", new { User = "ConsoleClient", Message = "Greetings to all participants of Bydgoszcz .Net User Group!" });
+                var message = new { User = "ConsoleClient", Message = "Greetings to all participants of Bydgoszcz .Net User Group!" };
+                await connection.InvokeAsync("SendMessage", message);
             }
 
             Console.WriteLine("Press key to close!");
