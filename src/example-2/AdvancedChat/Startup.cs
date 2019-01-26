@@ -27,7 +27,10 @@ namespace AdvancedChat
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddHealthChecks();
-
+            services.AddCors(option =>
+            {
+                option.AddDefaultPolicy(opt => { opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5005").AllowCredentials(); });
+            });
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
@@ -63,6 +66,7 @@ namespace AdvancedChat
         {
             app.UseHealthChecks("/health");
             //app.UseHttpsRedirection  TODO causing errors!
+            app.UseCors();
             app.UseAuthentication();
             app.UseSignalR(routes =>
             {

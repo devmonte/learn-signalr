@@ -21,7 +21,7 @@ namespace AdvancedChat.Controllers
         public async Task<IActionResult> Post([FromBody] UserDto user)
         {
 
-            if (string.Equals(user.Password, "BdgDotNet"))
+            if (!string.Equals(user.Password, "BdgDotNet"))
                 return StatusCode(403, "Invalid password!");
 
             var token = _tokenProviderService.GenerateToken(user);
