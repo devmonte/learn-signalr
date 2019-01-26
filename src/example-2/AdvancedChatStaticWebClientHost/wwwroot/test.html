@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div id="demo">
+
+        <h1>The XMLHttpRequest Object</h1>
+
+        <button type="button"
+                onclick="loadDoc('ajax_info.txt', myFunction)">
+            Change Content
+        </button>
+    </div>
+
+    <script>
+        function loadDoc(url, cFunction) {
+
+            var user = { Name: "Test", Password: "BdgDotNet" };
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this);
+                }
+            };
+            xhttp.open("POST", "http://localhost:5000/api/auth", true);
+            xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify(user));
+        }
+        function myFunction(xhttp) {
+            document.getElementById("demo").innerHTML =
+                xhttp.responseText;
+        }
+    </script>
+</body>
+</html>
