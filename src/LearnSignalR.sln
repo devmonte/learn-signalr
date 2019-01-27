@@ -27,14 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedChat.IntegrationTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.IntegrationTests", "Chat.IntegrationTests\Chat.IntegrationTests.csproj", "{2F945860-A792-4EF1-BCDA-E99190648925}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AdvancedChatWebClient", "AdvancedChatWebClient", "{E635511F-1238-45DA-B00A-C40FC32ED7DA}"
-	ProjectSection(SolutionItems) = preProject
-		example-2\AdvancedChatWebClient\index.html = example-2\AdvancedChatWebClient\index.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{DE704508-E58E-464F-9E27-D6A10F49F0E0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{67BDFE64-FACE-45EF-A05D-8545C8823BB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedChatStaticWebClientHost", "example-2\AdvancedChatStaticWebClientHost\AdvancedChatStaticWebClientHost.csproj", "{5ACAD7A9-47DF-4B75-8A6C-080D68D9574B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +67,10 @@ Global
 		{2F945860-A792-4EF1-BCDA-E99190648925}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F945860-A792-4EF1-BCDA-E99190648925}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F945860-A792-4EF1-BCDA-E99190648925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ACAD7A9-47DF-4B75-8A6C-080D68D9574B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ACAD7A9-47DF-4B75-8A6C-080D68D9574B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ACAD7A9-47DF-4B75-8A6C-080D68D9574B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ACAD7A9-47DF-4B75-8A6C-080D68D9574B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,9 +84,7 @@ Global
 		{DF5EB555-6167-438D-AB10-8476D6927848} = {E408581B-9A80-4027-8D80-1121536F3D29}
 		{3963A373-487D-4CE9-BFEE-A19BFEAE853D} = {D6B6D993-9E98-457C-99E2-4EDF54D8D2CC}
 		{2F945860-A792-4EF1-BCDA-E99190648925} = {D6B6D993-9E98-457C-99E2-4EDF54D8D2CC}
-		{E635511F-1238-45DA-B00A-C40FC32ED7DA} = {E408581B-9A80-4027-8D80-1121536F3D29}
-		{DE704508-E58E-464F-9E27-D6A10F49F0E0} = {E635511F-1238-45DA-B00A-C40FC32ED7DA}
-		{67BDFE64-FACE-45EF-A05D-8545C8823BB7} = {E635511F-1238-45DA-B00A-C40FC32ED7DA}
+		{5ACAD7A9-47DF-4B75-8A6C-080D68D9574B} = {E408581B-9A80-4027-8D80-1121536F3D29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0AAB02CE-FD7B-4AB9-A90D-F9D1571F2CA1}
