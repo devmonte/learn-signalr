@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,19 @@ namespace AdvancedChat
             services.AddHealthChecks();
             services.AddCors(option =>
             {
-                option.AddDefaultPolicy(opt => { opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5005").AllowCredentials(); });
+                var origins = Configuration.GetSection("AllowedOrigins")
+                    .AsEnumerable()
+                    .Where(c => c.Value != null)
+                    .Select(c => c.Value)
+                    .ToArray();
+
+                option.AddDefaultPolicy(opt => 
+                {
+                    opt.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(origins)
+                    .AllowCredentials();
+                });
             });
             services.AddAuthorization(options =>
             {

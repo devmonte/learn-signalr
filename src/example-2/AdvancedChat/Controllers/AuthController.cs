@@ -18,7 +18,7 @@ namespace AdvancedChat.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] UserDto user)
+        public IActionResult Post([FromBody] UserDto user)
         {
 
             if (!string.Equals(user.Password, "BdgDotNet"))

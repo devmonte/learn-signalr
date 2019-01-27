@@ -12,11 +12,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Server.Services
 {
-    public class ImageProcessingService : IHostedService, IDisposable
+    public class ImageProcessingService : IHostedService
     {
         private readonly ILogger<ImageProcessingService> _logger;
-        private IHubContext<ImageProcessingHub, IImageProcessingHubClient> _hubContext;
-        private Timer _timer;
+        private readonly IHubContext<ImageProcessingHub, IImageProcessingHubClient> _hubContext;
 
         public ImageProcessingService(ILogger<ImageProcessingService> logger, IHubContext<ImageProcessingHub, IImageProcessingHubClient> hubContext)
         {
@@ -52,14 +51,8 @@ namespace Server.Services
         {
             _logger.LogInformation("Background Service is stopping.");
 
-            _timer?.Change(Timeout.Infinite, 0);
 
             return Task.CompletedTask;
-        }
-
-        public void Dispose()
-        {
-            _timer?.Dispose();
         }
     }
 }
