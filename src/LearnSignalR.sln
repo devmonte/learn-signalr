@@ -32,9 +32,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedChat.IntegrationTests", "AdvancedChat.IntegrationTests\AdvancedChat.IntegrationTests.csproj", "{865E209F-5219-4151-B406-0A08DAE819C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdvancedChat.IntegrationTests", "AdvancedChat.IntegrationTests\AdvancedChat.IntegrationTests.csproj", "{865E209F-5219-4151-B406-0A08DAE819C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleChat", "example-1\SimpleChat\SimpleChat.csproj", "{539DCD5A-3789-42D7-9A24-411E3AFC29A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleChat", "example-1\SimpleChat\SimpleChat.csproj", "{539DCD5A-3789-42D7-9A24-411E3AFC29A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "example-5", "example-5", "{AE6C19AE-17E7-4440-8A8D-A3ABE648E746}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

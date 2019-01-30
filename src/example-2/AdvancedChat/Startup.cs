@@ -74,12 +74,10 @@ namespace AdvancedChat
                     {
                         var accessToken = context.Request.Query["access_token"];
 
-                        // If the request is for our hub...
                         var path = context.HttpContext.Request.Path;
                         if (!string.IsNullOrEmpty(accessToken) &&
                             (path.StartsWithSegments("/chatHub")))
                         {
-                            // Read the token out of the query string
                             context.Token = accessToken;
                         }
                         return Task.CompletedTask;
@@ -89,13 +87,13 @@ namespace AdvancedChat
 
             services.AddSignalR();
             services.AddTransient<ITokenProviderService, TokenProviderService>();
-            services.AddHostedService<BtcPriceBotService>();
+            //services.AddHostedService<BtcPriceBotService>(); //TODO causing problem with integration tests tests
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseHttpsRedirection();
             app.UseHealthChecks("/health");
-            //app.UseHttpsRedirection  TODO causing errors!
             app.UseCors();
             app.UseAuthentication();
             app.UseSignalR(routes =>

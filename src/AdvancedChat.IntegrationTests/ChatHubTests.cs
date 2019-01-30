@@ -78,7 +78,7 @@ namespace AdvancedChat.IntegrationTests
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
                     opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling | Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents;
-                    opt.Headers.Add("access_token", token);
+                    opt.AccessTokenProvider = () => Task.FromResult(token);
                 })
                 .Build();
 
