@@ -1,0 +1,65 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>SignalR!</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-primary">
+        <a class="navbar-brand" href="https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.2">Po co komu SignalR?</a>
+      </nav>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-sm">
+            </div>
+            <div class="col-lg-8">
+
+                <div class="container mt-5" id="loginContainer">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">User name</label>
+                            <input type="text" class="form-control" id="userName" aria-describedby="userNameHelp" placeholder="Enter your name">
+                            <small id="userNameHelp" class="form-text text-muted">Don't be shy!</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary align-middle" id="loginBtn">Connect!</button>
+                    </form>
+                </div>
+
+                <div class="container mt-5" id="conversationContainer">
+                    <form>
+                        <div class="row align-items-center">
+                            <div class="col-sm">
+                                <input type="text" class="form-control" id="userMessage" placeholder="Enter message">
+                            </div>
+                            <div class="col-sm">
+                                <button type="submit" class="btn btn-primary" id="sendBtn">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="list-group mt-2" id="messagesList">
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-sm">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="./lib/signalr.js"></script>
+    <script src="./chat.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
