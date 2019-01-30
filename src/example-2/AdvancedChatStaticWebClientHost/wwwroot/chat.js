@@ -20,7 +20,7 @@
                 startConnection(xhttp.response);
             }
         };
-        xhttp.open("POST", "http://localhost:5000/api/auth", true);
+        xhttp.open("POST", "https://localhost:5001/api/auth", true);
         xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
         xhttp.setRequestHeader('Content-Type', 'application/json');
         xhttp.send(JSON.stringify(user));
@@ -29,7 +29,7 @@
     function startConnection(token) {
 
         var connection = new signalR.HubConnectionBuilder()
-            .withUrl('http://localhost:5000/chatHub', { accessTokenFactory: () => token })
+            .withUrl('https://localhost:5001/chatHub', { accessTokenFactory: () => token })
             .build();
 
         connection.on("ReceiveMessage", function (message) {
