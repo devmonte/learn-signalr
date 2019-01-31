@@ -44,14 +44,7 @@ namespace AdvancedChat
                     .AllowCredentials();
                 });
             });
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
-                {
-                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                    policy.RequireClaim(ClaimTypes.NameIdentifier);
-                });
-            });
+            services.AddAuthorization();
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -87,7 +80,7 @@ namespace AdvancedChat
 
             services.AddSignalR();
             services.AddTransient<ITokenProviderService, TokenProviderService>();
-            //services.AddHostedService<BtcPriceBotService>(); //TODO causing problem with integration tests tests
+            services.AddHostedService<BtcPriceBotService>(); //TODO causing problems with integration tests tests
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

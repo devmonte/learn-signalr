@@ -24,7 +24,7 @@ namespace AdvancedChat.Services
         {
             do
             {
-                await Task.Delay(TimeSpan.FromMinutes(3), cancellationToken);
+                await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
                 await SendCurrentBtcPrice(cancellationToken);
             } while (!cancellationToken.IsCancellationRequested);
         }
@@ -33,19 +33,14 @@ namespace AdvancedChat.Services
         {
             if (!cancellationToken.IsCancellationRequested)
             {
-                var message = new MessageDto
-                {
-                    User = "BtcPriceBot",
-                    Message = $"Current BTC price: {new Random().Next(3000, 5000)} $!"
-                };
                 await _hubContext.Clients.All
-                    .ReceiveMessage(message);
+                    .ReceiveNotification($"Current BTC price: {new Random().Next(3000, 5000)} $!");
             }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
