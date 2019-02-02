@@ -1,4 +1,4 @@
-My own examples of using SignalR library.
+My own examples of using ASP.NET Core SignalR library.
 
 Already implemented examples:
 - [x] Example 1: Simple Chat with additional C# console client
@@ -10,4 +10,6 @@ Already implemented examples:
 
 Resources about SignalR:
 - [docs](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.2)
-- [samples](https://github.com/aspnet/SignalR-samples)
+- [signalR samples](https://github.com/aspnet/SignalR-samples)
+- [Azure SignalR samples] (https://docs.microsoft.com/en-us/azure/azure-signalr/signalr-overview)
+- [transport protocols](https://github.com/aspnet/SignalR/blob/release/2.2/specs/TransportProtocols.md)
