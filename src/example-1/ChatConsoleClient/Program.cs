@@ -12,7 +12,7 @@ namespace ChatConsoleClient
             Console.WriteLine("Let's connect to our chat!");
 
             var connection = new HubConnectionBuilder()
-                .WithUrl("https://example-one-chat.azurewebsites.net/chatHub")
+                .WithUrl("http://localhost:5000/chatHub")
                 .Build();
 
             connection.On<string, string>("ReceiveMessage", 

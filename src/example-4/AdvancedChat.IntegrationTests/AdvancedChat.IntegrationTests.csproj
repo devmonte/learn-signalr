@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\example-2\AdvancedChat\AdvancedChat.csproj" />
+    <ProjectReference Include="..\..\example-2\AdvancedChat\AdvancedChat.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 using Chat;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
@@ -26,7 +27,7 @@ namespace Chat.IntegrationTests
                 .WithUrl($"{baseAddress}chatHub", opt =>
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
-                    opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling | Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents;
+                    opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents | HttpTransportType.WebSockets;
                 })
                 .Build();
 

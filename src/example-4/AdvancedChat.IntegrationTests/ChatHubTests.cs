@@ -1,5 +1,6 @@
 using AdvancedChat;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
@@ -45,7 +46,7 @@ namespace AdvancedChat.IntegrationTests
                 .WithUrl($"{baseAddress}chatHub", opt =>
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
-                    opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling | Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents;
+                    opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents;
                 })
                 .Build();
 
@@ -68,7 +69,7 @@ namespace AdvancedChat.IntegrationTests
             //Arrange
             var client = _webAppFactory.CreateClient();
 
-            var serializedUser = JsonConvert.SerializeObject(new { Name = "ConsoleClient", Password = "BdgDotNet", Group = "TestGroup" });
+            var serializedUser = JsonConvert.SerializeObject(new { Name = "ConsoleClient", Password = "dotnet" });
             var response = await client.PostAsync("api/auth", new StringContent(serializedUser, Encoding.UTF8, "application/json"));
             var token = await response.Content.ReadAsStringAsync();
 
@@ -77,7 +78,7 @@ namespace AdvancedChat.IntegrationTests
                 .WithUrl($"{baseAddress}chatHub", opt =>
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
-                    opt.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling | Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents;
+                    opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents;
                     opt.AccessTokenProvider = () => Task.FromResult(token);
                 })
                 .Build();
