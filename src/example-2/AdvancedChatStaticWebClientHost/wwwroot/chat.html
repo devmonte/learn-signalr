@@ -68,6 +68,8 @@
         document.addEventListener('DOMContentLoaded', function () {
 
             var userName = "";
+            document.getElementById("userName").value = Math.random().toString(36).substring(2, 10);
+
             function createMessageEntry(encodedName, encodedMsg) {
                 var entry = document.createElement('div');
                 entry.classList.add("message-entry");
