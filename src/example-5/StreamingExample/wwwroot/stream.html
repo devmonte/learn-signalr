@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>stream</title>
+</head>
+<body>
+
+    <script type="text/javascript" src="/lib/signalr.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', async function () {
+
+            var connection = new signalR.HubConnectionBuilder()
+                .withUrl('/streamHub')
+                .build();
+            connection.start()
+                .then(async function () {
+                    let subject = new signalR.Subject();
+                    await connection.send("StartStream", "MyAsciiArtStream", subject);
+
+                    subject.next("example1");
+                    subject.next("example2");
+                    subject.next("example3");
+                    subject.next("example4");
+                    subject.complete();
+                })
+                .catch(function (error) {
+                    console.error(error.message);
+                });
+
+        });
+
+    </script>
+</body>
+</html>

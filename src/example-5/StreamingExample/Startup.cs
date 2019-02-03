@@ -22,10 +22,10 @@ namespace StreamingExample
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
             app.UseSignalR(opt =>
             {
-                opt.MapHub<StreamHub>("/streamingHub");
+                opt.MapHub<StreamHub>("/streamHub");
             });
 
             app.UseRouting(routes =>

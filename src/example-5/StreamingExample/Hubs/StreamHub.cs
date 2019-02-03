@@ -6,12 +6,20 @@ using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 
 namespace StreamingExample.Hubs
 {
     public class StreamHub : Hub
     {
+        private readonly ILogger<StreamHub> _logger;
 
+        public StreamHub(ILogger<StreamHub> logger)
+        {
+            _logger = logger;
+        }
+
+        //Client to server streaming
         public async Task StartStream(string streamName, ChannelReader<string> streamContent)
         {
             // read from and process stream items
@@ -19,11 +27,12 @@ namespace StreamingExample.Hubs
             {
                 while (streamContent.TryRead(out var content))
                 {
-                    // process content
+                    _logger.LogInformation($"Received {content}!");
                 }
             }
         }
 
+        //Server to client streaming
         public ChannelReader<int> Counter(int count, int delay, CancellationToken cancellationToken)
         {
             var channel = Channel.CreateUnbounded<int>();
