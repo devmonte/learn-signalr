@@ -28,7 +28,8 @@ namespace AdvancedChat.Hubs
         {
             var notificationMessage = $"New user connected: {Context.UserIdentifier}";
             _logger.LogDebug(notificationMessage);
-            await Clients.AllExcept(Context.UserIdentifier).ReceiveNotification(notificationMessage);
+            await Clients.AllExcept(Context.ConnectionId).ReceiveNotification(notificationMessage);
+            await Clients.User(Context.UserIdentifier).ReceiveNotification("Welcome in our amazing chat!");
             await base.OnConnectedAsync();
         }
 

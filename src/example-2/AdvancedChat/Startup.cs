@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -59,6 +60,7 @@ namespace AdvancedChat
                     ValidateIssuer = false,
                     ValidateActor = false,
                     ValidateLifetime = true,
+                    ValidIssuer = "AdvancedChat",
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["SecretKey"]))
                 };
                 x.Events = new JwtBearerEvents
@@ -80,7 +82,8 @@ namespace AdvancedChat
 
             services.AddSignalR();
             services.AddTransient<ITokenProviderService, TokenProviderService>();
-            //services.AddHostedService<BtcPriceBotService>(); //TODO causing problems with integration tests tests
+            services.AddSingleton<IUserIdProvider, NameBasedUserIdProvider>();
+            services.AddHostedService<BtcPriceBotService>(); //TODO causing problems with integration tests tests
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
