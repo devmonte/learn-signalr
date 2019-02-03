@@ -19,7 +19,7 @@ namespace AdvancedChatConsoleClient
 
             var token = await GetToken();
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5000/chatHub", options =>
+                .WithUrl("https://localhost:5001/chatHub", options =>
                 {
                     options.AccessTokenProvider = () => Task.FromResult(token);
                 })
@@ -60,7 +60,7 @@ namespace AdvancedChatConsoleClient
             var token = "";
             using (var apiClient = new HttpClient())
             {
-                var serializedUser = JsonConvert.SerializeObject(new { Name = "ConsoleClient", Password = "BdgDotNet", Group = "TestGroup" });
+                var serializedUser = JsonConvert.SerializeObject(new { Name = "ConsoleClient", Password = "dotnet" } );
                 var response = await apiClient.PostAsync("https://localhost:5001/api/auth", new StringContent(serializedUser, Encoding.UTF8, "application/json"));
                 token = await response.Content.ReadAsStringAsync();
             }

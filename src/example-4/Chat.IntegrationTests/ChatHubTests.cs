@@ -31,6 +31,27 @@ namespace Chat.IntegrationTests
                 })
                 .Build();
 
+            //Act
+            await hubConnection.StartAsync();
+
+            //Assert
+            Assert.Equal(HubConnectionState.Connected, hubConnection.State);
+        }
+
+        [Fact]
+        public async Task SendMessageToHub_ShouldPropagateMessageFurther()
+        {
+            //Arrange
+            _webAppFactory.CreateClient();
+            var baseAddress = _webAppFactory.Server.BaseAddress;
+            var hubConnection = new HubConnectionBuilder()
+                .WithUrl($"{baseAddress}chatHub", opt =>
+                {
+                    opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
+                    opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents | HttpTransportType.WebSockets;
+                })
+                .Build();
+
             var messageToSend = "Hello Guys!";
             var receivedMessage = string.Empty;
 
@@ -42,7 +63,6 @@ namespace Chat.IntegrationTests
 
             //Assert
             Assert.Equal(messageToSend, receivedMessage);
-
         }
     }
 }

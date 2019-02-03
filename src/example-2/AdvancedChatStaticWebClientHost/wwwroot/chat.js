@@ -84,9 +84,11 @@
         }
 
         function startConnection(token) {
+
             var connection = new signalR.HubConnectionBuilder()
                 .withUrl('https://localhost:5001/chatHub', { accessTokenFactory: () => token })
                 .build();
+
             bindConnectionMessage(connection);
             connection.start()
                 .then(function () {
@@ -110,7 +112,9 @@
                 if (this.readyState === 4 && this.status === 200) {
                     console.log(xhttp.response);
                     document.getElementById("loginContainer").style.display = "none";
+
                     startConnection(xhttp.response);
+
                 }
                 else if (this.readyState === 4 && this.status === 403) {
 

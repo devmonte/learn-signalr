@@ -83,7 +83,7 @@ namespace AdvancedChat
             services.AddSignalR();
             services.AddTransient<ITokenProviderService, TokenProviderService>();
             services.AddSingleton<IUserIdProvider, NameBasedUserIdProvider>();
-            services.AddHostedService<BtcPriceBotService>(); //TODO causing problems with integration tests tests
+            //services.AddHostedService<BtcPriceBotService>(); //TODO causing problems with integration tests tests
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

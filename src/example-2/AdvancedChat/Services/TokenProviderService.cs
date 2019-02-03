@@ -35,11 +35,6 @@ namespace AdvancedChat.Services
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
-
-            //var claims = new[] { new Claim(ClaimTypes.NameIdentifier, user.Name) };
-            //var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
-            //var token = new JwtSecurityToken("SignalRTestServer", "SignalRTests", claims, expires: DateTime.UtcNow.AddSeconds(30), signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));
-            //return tokenHandler.WriteToken(token);
         }
     }
 }
