@@ -36,14 +36,14 @@
 
                 var entry = document.createElement('div');
                 entry.classList.add("message-entry");
-                entry.innerHTML = notification.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");;
+                entry.innerHTML = notification.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
                 entry.classList.add("text-center");
                 entry.classList.add("system-message");
 
                 var messageBox = document.getElementById('messages');
                 messageBox.appendChild(entry);
                 messageBox.scrollTop = messageBox.scrollHeight;
-            }
+            };
 
             connection.on('receiveMessage', messageCallback);
             connection.on('receiveNotification', notificationCallback);
@@ -100,7 +100,7 @@
         function getToken() {
             console.log("sending request for Token!");
 
-            userName = document.getElementById("userName").value
+            userName = document.getElementById("userName").value;
             var password = document.getElementById("userPassword").value;
             var user = { Name: userName, Password: password };
 
