@@ -11,20 +11,21 @@ namespace Chat.IntegrationTests
     public class ChatHubTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _webAppFactory;
+        private readonly Uri _baseAddress;
 
         public ChatHubTests(WebApplicationFactory<Startup> factory)
         {
             _webAppFactory = factory;
+            _webAppFactory.CreateClient();
+            _baseAddress = _webAppFactory.Server.BaseAddress;
         }
 
         [Fact]
         public async Task ConnectToHub_ShouldConnect()
         {
             //Arrange
-            _webAppFactory.CreateClient();
-            var baseAddress = _webAppFactory.Server.BaseAddress;
             var hubConnection = new HubConnectionBuilder()
-                .WithUrl($"{baseAddress}chatHub", opt =>
+                .WithUrl($"{_baseAddress}chatHub", opt =>
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
                     opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents | HttpTransportType.WebSockets;
@@ -42,10 +43,8 @@ namespace Chat.IntegrationTests
         public async Task SendMessageToHub_ShouldPropagateMessageFurther()
         {
             //Arrange
-            _webAppFactory.CreateClient();
-            var baseAddress = _webAppFactory.Server.BaseAddress;
             var hubConnection = new HubConnectionBuilder()
-                .WithUrl($"{baseAddress}chatHub", opt =>
+                .WithUrl($"{_baseAddress}chatHub", opt =>
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
                     opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents | HttpTransportType.WebSockets;

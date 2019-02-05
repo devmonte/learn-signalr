@@ -1,5 +1,3 @@
-using AdvancedChat;
-using FluentAssertions;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -8,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualStudio.Web.CodeGeneration;
 using Xunit;
 
 namespace AdvancedChat.IntegrationTests
@@ -15,20 +14,23 @@ namespace AdvancedChat.IntegrationTests
     public class ChatHubTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _webAppFactory;
+        private readonly HttpClient _appClient;
+        private readonly Uri _baseAddress;
 
         public ChatHubTests(WebApplicationFactory<Startup> factory)
         {
             _webAppFactory = factory;
+            _appClient = _webAppFactory.CreateClient();
+            _baseAddress = _webAppFactory.Server.BaseAddress;
         }
 
         [Fact]
         public async Task GetHealthCheck_ShouldReturnSuccess()
         {
             //Arrange
-            var client = _webAppFactory.CreateClient();
 
             //Act
-            var response = await client.GetAsync("/health");
+            var response = await _appClient.GetAsync("/health");
 
             //Assert
             response.EnsureSuccessStatusCode();
@@ -40,10 +42,8 @@ namespace AdvancedChat.IntegrationTests
         public async Task ConnectToHubWithoutToken_ShouldThrowException()
         {
             //Arrange
-            _webAppFactory.CreateClient();
-            var baseAddress = _webAppFactory.Server.BaseAddress;
             var hubConnection = new HubConnectionBuilder()
-                .WithUrl($"{baseAddress}chatHub", opt =>
+                .WithUrl($"{_baseAddress}chatHub", opt =>
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
                     opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents;
@@ -59,23 +59,19 @@ namespace AdvancedChat.IntegrationTests
             });
 
             //Assert
-            expectedException.InnerException
-                .Message.Should().Be("Response status code does not indicate success: 401 (Unauthorized).");
+            Assert.Equal("Response status code does not indicate success: 401 (Unauthorized).", expectedException.InnerException.Message);
         }
 
         [Fact]
         public async Task ConnectToHubWithToken_ShouldSuccessfullyConnect()
         {
             //Arrange
-            var client = _webAppFactory.CreateClient();
-
             var serializedUser = JsonConvert.SerializeObject(new { Name = "ConsoleClient", Password = "dotnet" });
-            var response = await client.PostAsync("api/auth", new StringContent(serializedUser, Encoding.UTF8, "application/json"));
+            var response = await _appClient.PostAsync("api/auth", new StringContent(serializedUser, Encoding.UTF8, "application/json"));
             var token = await response.Content.ReadAsStringAsync();
 
-            var baseAddress = _webAppFactory.Server.BaseAddress;
             var hubConnection = new HubConnectionBuilder()
-                .WithUrl($"{baseAddress}chatHub", opt =>
+                .WithUrl($"{_baseAddress}chatHub", opt =>
                 {
                     opt.HttpMessageHandlerFactory = _ => _webAppFactory.Server.CreateHandler();
                     opt.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents;
@@ -87,7 +83,7 @@ namespace AdvancedChat.IntegrationTests
             await hubConnection.StartAsync();
 
             //Assert
-            hubConnection.State.Should().Be(HubConnectionState.Connected);
+            Assert.Equal(HubConnectionState.Connected, hubConnection.State);
         }
 
     }
