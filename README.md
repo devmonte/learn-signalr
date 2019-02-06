@@ -5,7 +5,7 @@ Already implemented examples:
 - [X] Example 2: More advanced Chat: TypedHubs, Authorization
 - [X] Example 3: MessagePack
 - [X] Example 4: Integration tests with SignalR
-- [x] Example 5: Streaming with IAsyncEnumerable
+- [ ] Example 5: Streaming with IAsyncEnumerable
 - [ ] Example 6: Azure SignalR Service
 
 Resources about SignalR:
